@@ -35,5 +35,10 @@ def test_string_to_map(text):
     }
 
 
-def test_most_frequent(words):
-    assert most_common(words, 2) == ["baz=5", "foo=3"]
+@pytest.mark.parametrize("n, expected", [
+    (2, ["baz=5", "foo=3"]),
+    (3, ["baz=5", "foo=3", "quux=2"]),
+    (4, ["baz=5", "foo=3", "quux=2", "bar=1"]),
+])
+def test_most_frequent(words, n, expected):
+    assert most_common(words, n) == expected
