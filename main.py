@@ -7,12 +7,18 @@ def file_to_map(filename):
     return dict
 
 
-def most_common(map, output, count):
+def most_common(map, count):
+    freq = []
+    for idx, key in enumerate(sorted(map, key=map.get, reverse=True)):
+        if idx >= count:
+            break
+        freq.append(f'{key}={map[key]}')
+    return freq
+
+
+def write_list_to_file(list, output):
     with open(output, 'w') as f:
-        for idx, key in enumerate(sorted(map, key=map.get, reverse=True)):
-            if idx >= count:
-                break
-            f.write(f'{key}={map[key]}\n')
+        f.write('\n'.join(list))
 
 
 def main():
@@ -20,7 +26,7 @@ def main():
     filename_output = "./data/output.txt"
     select_num = 10
     try:
-        most_common(file_to_map(filename_input), filename_output, select_num)
+        write_list_to_file(most_common(file_to_map(filename_input), select_num), filename_output)
         print("Success")
     except Exception as E:
         print(f"Oops, Error: {E}")
