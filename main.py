@@ -1,9 +1,8 @@
-def file_to_map(filename):
+def string_to_map(text):
     dict = {}
-    with open(filename) as f:
-        for line in f:
-            trimed = line.strip()
-            dict[trimed] = dict.get(trimed, 0) + 1
+    for line in text.splitlines():
+        trimed = line.strip()
+        dict[trimed] = dict.get(trimed, 0) + 1
     return dict
 
 
@@ -26,7 +25,9 @@ def main():
     filename_output = "./data/output.txt"
     select_num = 10
     try:
-        write_list_to_file(most_common(file_to_map(filename_input), select_num), filename_output)
+        with open(filename_input, 'r') as f:
+            input_text = f.read()
+        write_list_to_file(most_common(string_to_map(input_text), select_num), filename_output)
         print("Success")
     except Exception as E:
         print(f"Oops, Error: {E}")
