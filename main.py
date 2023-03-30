@@ -6,12 +6,14 @@ def file_to_map(filename):
             dict[trimed] = dict.get(trimed, 0) + 1
     return dict
 
+
 def most_common(map, output, count):
     with open(output, 'w') as f:
         for idx, key in enumerate(sorted(map, key=map.get, reverse=True)):
             if idx >= count:
                 break
             f.write(f'{key}={map[key]}\n')
+
 
 def main():
     filename_input = "./data/input.txt"
@@ -22,6 +24,7 @@ def main():
         print("Success")
     except Exception as E:
         print(f"Oops, Error: {E}")
+
 
 if __name__ == "__main__":
     main()
